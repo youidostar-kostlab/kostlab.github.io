@@ -1,241 +1,525 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KostLab | AI·데이터 기반 디지털 전환 파트너</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="코스트랩(KostLab)은 교육·공공·기업 환경에 최적화된 AI·데이터 플랫폼을 설계·구축합니다." />
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="KostLab" />
+  <meta property="og:description" content="화이트톤·공공기관 스타일 회사소개 원페이지" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kostlab.co.kr" />
 
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
-      color: #111827;
-      background: #ffffff;
-    }
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
+    :root{
+      --bg:#ffffff;
+      --bg2:#f7f8fb;
+      --card:#ffffff;
+      --line:#e6e8ee;
+      --text:#0b1220;
+      --muted:#526175;
+      --brand:#1d4ed8; /* 공공기관 느낌의 블루 */
+      --brand2:#0ea5e9;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+      --max:1120px;
     }
 
-    /* ===== Header ===== */
-    header {
-      border-bottom: 1px solid #e5e7eb;
-      background: #ffffff;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      color:var(--text);
+      background:
+        linear-gradient(180deg, var(--bg), var(--bg2));
     }
-    .header-inner {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding:0 22px;}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .h-inner{
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
     }
-    .brand img {
-      height: 40px;
-      width: auto;
-      display: block;
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
     }
-    .brand-text strong {
-      font-size: 18px;
-      font-weight: 800;
-      display: block;
+    .brand-name{
+      display:flex; flex-direction:column; line-height:1.1;
     }
-    .brand-text span {
-      font-size: 12px;
-      color: #6b7280;
-      font-weight: 600;
+    .brand-name strong{font-weight:900; letter-spacing:.2px;}
+    .brand-name span{font-size:12px; color:var(--muted); font-weight:700;}
+
+    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:800;
+      font-size:14px;
+      padding:10px 12px;
+      border-radius:12px;
     }
-    nav a {
-      margin-left: 24px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #374151;
+    nav a:hover{background:#f1f5ff; color:#1f2a44;}
+    .cta{
+      background: var(--brand);
+      color:#fff !important;
+      border:1px solid rgba(29,78,216,.25);
+      box-shadow: 0 8px 20px rgba(29,78,216,.18);
+    }
+    .cta:hover{filter:brightness(1.02);}
+
+    /* Hero */
+    .hero{
+      padding:54px 0 24px;
+      background: radial-gradient(900px 300px at 10% 0%, rgba(29,78,216,.10), transparent 60%),
+                  radial-gradient(800px 260px at 90% 10%, rgba(14,165,233,.10), transparent 55%);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:start;
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:900;
+      background:#ffffff;
+      border:1px solid var(--line);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:40px;
+      line-height:1.12;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.8;
+      max-width:720px;
+    }
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:44px; padding:0 16px;
+      border-radius:12px;
+      font-weight:900;
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#1f2a44;
+    }
+    .btn-primary{
+      background: var(--brand);
+      color:#fff;
+      border-color: rgba(29,78,216,.25);
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 10px 24px rgba(16,24,40,.10);}
+
+    /* Cards */
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .list{
+      margin:0; padding:0; list-style:none;
+      display:grid; gap:10px;
+      color:var(--muted);
+      line-height:1.7;
+      font-weight:700;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; display:inline-block; margin-right:10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      transform: translateY(-1px);
+    }
+    .badge-row{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
+    }
+    .badge{
+      font-size:12px; font-weight:900;
+      color:#1f2a44;
+      background:#f3f6ff;
+      border:1px solid #dbe4ff;
+      padding:6px 10px;
+      border-radius:999px;
     }
 
-    /* ===== Hero ===== */
-    .hero {
-      padding: 64px 0 48px;
+    /* Section */
+    section{
+      padding:42px 0;
+      border-top:1px solid var(--line);
+      background:#fff;
     }
-    .hero h1 {
-      font-size: 40px;
-      line-height: 1.2;
-      margin: 0 0 16px;
+    section.alt{background: #fbfcff;}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:18px;
+      margin-bottom:14px;
     }
-    .hero p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #4b5563;
-      max-width: 720px;
+    h2{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.01em;
     }
-    .badge {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #1d4ed8;
-      background: #eef2ff;
-      border-radius: 999px;
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.8;
+      max-width:780px;
+      font-weight:650;
     }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    .panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 8px 18px rgba(16,24,40,.06);
+    }
+    .p{margin:0; color:var(--muted); line-height:1.9; font-weight:650;}
+    .dl{margin:0; display:grid; gap:10px;}
+    .dl div{display:grid; grid-template-columns: 90px 1fr; gap:10px;}
+    dt{font-weight:900; color:#1f2a44;}
+    dd{margin:0; color:var(--muted); font-weight:650;}
 
-    /* ===== Section ===== */
-    section {
-      padding: 48px 0;
-      border-top: 1px solid #e5e7eb;
-    }
-    section h2 {
-      font-size: 26px;
-      margin-bottom: 12px;
-    }
-    section p {
-      color: #4b5563;
-      line-height: 1.8;
-      max-width: 800px;
-    }
-
-    .grid {
-      display: grid;
+    .cards-3{
+      display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 24px;
+      gap:14px;
+      margin-top:16px;
     }
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 20px;
-      background: #ffffff;
+    .cards-3 .panel{transition: transform .15s ease;}
+    .cards-3 .panel:hover{transform: translateY(-3px);}
+
+    .bullets{margin:0; padding-left:18px; color:var(--muted); line-height:1.9; font-weight:650;}
+
+    /* Table-like */
+    .table{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:#fff;
+      box-shadow: 0 10px 24px rgba(16,24,40,.06);
     }
-    .card h3 {
-      margin-top: 0;
-      font-size: 18px;
+    .tr{
+      display:grid;
+      grid-template-columns: 120px 1fr 170px;
+      gap:12px;
+      padding:14px 16px;
+      border-top:1px solid var(--line);
+      align-items:center;
     }
-    .card ul {
-      padding-left: 18px;
-      color: #4b5563;
-      line-height: 1.8;
+    .tr:first-child{border-top:0;}
+    .th{
+      background:#f5f7ff;
+      font-weight:900;
+      color:#1f2a44;
+    }
+    .tag{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:26px; padding:0 10px;
+      border-radius:999px;
+      background:#eef2ff;
+      border:1px solid #dbe4ff;
+      color:#1f2a44;
+      font-weight:900;
+      font-size:12px;
+      width:max-content;
+    }
+    .note{
+      margin-top:12px;
+      color: #6b7a90;
+      font-size:13px;
+      line-height:1.7;
+      font-weight:650;
     }
 
-    /* ===== Footer ===== */
-    footer {
-      border-top: 1px solid #e5e7eb;
-      padding: 24px 0;
-      font-size: 13px;
-      color: #6b7280;
+    /* Footer */
+    footer{
+      padding:22px 0 30px;
+      border-top:1px solid var(--line);
+      background:#fff;
     }
+    .f-inner{
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      color:#6b7a90;
+      font-size:13px;
+      font-weight:650;
+    }
+    .f-links a{color:#526175; text-decoration:none; font-weight:900;}
+    .f-links a:hover{text-decoration:underline;}
 
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-      .hero h1 { font-size: 32px; }
+    /* Logo SVG sizing */
+    .kl-logo{width:38px; height:38px; flex:0 0 auto; display:block;}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr;}
+      .grid-2{grid-template-columns:1fr;}
+      .cards-3{grid-template-columns:1fr;}
+      .tr{grid-template-columns:1fr;}
+      h1{font-size:34px;}
+      nav{display:none;} /* 모바일은 메뉴 숨김(공공기관 스타일) */
     }
   </style>
 </head>
 
 <body>
-
 <header>
-  <div class="container header-inner">
-    <a class="brand" href="#">
-      <img src="assets/logo.png" alt="KostLab 로고">
-      <div class="brand-text">
+  <div class="container h-inner">
+    <a class="brand" href="#top" aria-label="KostLab Home">
+      <!-- 투명배경 로고(SVG) : 파일 업로드 없이 바로 사용 가능 -->
+      <svg class="kl-logo" viewBox="0 0 64 64" role="img" aria-label="KostLab logo">
+        <!-- 심볼: 데이터(점)+연결(라인)+K -->
+        <defs>
+          <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#1d4ed8"/>
+            <stop offset="1" stop-color="#0ea5e9"/>
+          </linearGradient>
+        </defs>
+        <rect x="6" y="6" width="52" height="52" rx="16" fill="url(#g)"/>
+        <path d="M22 44V20h6v10l10-10h8L34 32l12 12h-8L28 34v10h-6z" fill="#fff" opacity=".95"/>
+        <!-- 데이터 포인트 -->
+        <circle cx="48" cy="18" r="3" fill="#ffffff" opacity=".95"/>
+        <circle cx="50" cy="32" r="2.6" fill="#ffffff" opacity=".9"/>
+        <circle cx="46" cy="46" r="2.8" fill="#ffffff" opacity=".92"/>
+        <!-- 연결 라인 -->
+        <path d="M48 21 L50 29 M49 35 L47 43" stroke="#ffffff" stroke-width="2" opacity=".55" stroke-linecap="round"/>
+      </svg>
+
+      <span class="brand-name">
         <strong>KostLab</strong>
         <span>AI · Data · Cloud</span>
-      </div>
+      </span>
     </a>
 
-    <nav>
+    <nav aria-label="Primary">
       <a href="#about">회사소개</a>
       <a href="#services">사업영역</a>
-      <a href="#contact">문의</a>
+      <a href="#projects">수행실적</a>
+      <a href="#contact" class="cta">문의</a>
     </nav>
   </div>
 </header>
 
-<main>
+<main id="top">
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">신뢰 기반 구축 · 공공/대학 최적화</div>
+        <h1>AI·데이터 기반<br>디지털 전환 파트너</h1>
+        <p class="lead">
+          코스트랩은 교육·공공·기업 환경에 최적화된 AI·데이터 플랫폼을
+          <strong>설계·구축</strong>합니다. 단기 성과보다 <strong>지속 가능한 운영</strong>을 우선합니다.
+        </p>
 
-  <div class="hero container">
-    <span class="badge">신뢰 기반 구축 · 공공/대학 최적화</span>
-    <h1>AI·데이터 기반<br>디지털 전환 파트너</h1>
-    <p>
-      코스트랩(KostLab)은 교육기관 및 공공·기업 환경에 최적화된
-      AI·데이터 플랫폼을 설계하고 구축하는 기술 중심 솔루션 기업입니다.
-      단기 성과보다 지속 가능한 시스템 구축을 지향합니다.
-    </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact">협업/구축 문의</a>
+          <a class="btn" href="#projects">수행실적 보기</a>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="KostLab principles">
+        <h3>신뢰를 만드는 원칙</h3>
+        <ul class="list">
+          <li><span class="dot"></span>과장 없는 설명, 명확한 범위 정의</li>
+          <li><span class="dot"></span>보안·권한·감사로그를 기본으로 설계</li>
+          <li><span class="dot"></span>운영·확장·유지보수를 고려한 구조</li>
+        </ul>
+        <div class="badge-row">
+          <span class="badge">교육기관</span>
+          <span class="badge">공공·기관</span>
+          <span class="badge">엔터프라이즈</span>
+        </div>
+      </aside>
+    </div>
   </div>
 
   <section id="about">
     <div class="container">
-      <h2>회사소개</h2>
-      <p>
-        주식회사 코스트랩은 데이터, 인공지능, 클라우드 기술을 기반으로
-        조직의 업무와 환경에 실제로 정착되는 플랫폼을 구축합니다.
-      </p>
+      <div class="section-head">
+        <div>
+          <h2>회사소개</h2>
+          <p class="sub">
+            주식회사 코스트랩(KostLab)은 데이터·인공지능(AI)·클라우드 기술을 기반으로
+            교육기관 및 공공·기업 고객의 디지털 전환을 지원하는 기술 중심 솔루션 기업입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>우리가 하는 일</h3>
+          <p class="p">
+            단순 도입이 아니라, 조직과 업무에 실제로 정착되는 플랫폼 구축을 목표로 합니다.
+            요구사항 분석 → 설계 → 구축 → 운영까지 일관된 관점으로 지원합니다.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>회사 정보</h3>
+          <dl class="dl">
+            <div><dt>회사명</dt><dd>주식회사 코스트랩 (KostLab)</dd></div>
+            <div><dt>설립</dt><dd>2020년</dd></div>
+            <div><dt>소재지</dt><dd>경기도 성남시</dd></div>
+            <div><dt>도메인</dt><dd>kostlab.co.kr</dd></div>
+          </dl>
+          <p class="note">※ 세부 실적/고객명은 계약 및 보안 정책에 따라 일부 비공개 처리될 수 있습니다.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="services">
+  <section id="services" class="alt">
     <div class="container">
       <h2>사업영역</h2>
+      <p class="sub">필요한 범위를 정확히 정의하고, 운영 가능한 구조로 구축합니다.</p>
 
-      <div class="grid">
-        <div class="card">
+      <div class="cards-3">
+        <div class="panel">
           <h3>AI·데이터 플랫폼 구축</h3>
-          <ul>
-            <li>AI 기반 학습·행정 지원 시스템</li>
-            <li>데이터 수집·분석 파이프라인</li>
+          <ul class="bullets">
+            <li>AI 기반 학습/행정 지원 서비스</li>
+            <li>데이터 수집·정제·분석 파이프라인</li>
             <li>확장형 클라우드 아키텍처</li>
           </ul>
         </div>
 
-        <div class="card">
+        <div class="panel">
           <h3>교육·공공 특화 시스템</h3>
-          <ul>
+          <ul class="bullets">
             <li>학사·행정 시스템 연계</li>
-            <li>RPA 기반 업무 자동화</li>
-            <li>보안·권한·접근제어 설계</li>
+            <li>RPA 기반 반복업무 자동화</li>
+            <li>권한·접근제어·감사로그 설계</li>
           </ul>
         </div>
 
-        <div class="card">
+        <div class="panel">
           <h3>컨설팅 및 설계</h3>
-          <ul>
-            <li>AI 서비스 기획 및 도입</li>
-            <li>데이터 활용 전략 수립</li>
-            <li>단계별 구축 로드맵</li>
+          <ul class="bullets">
+            <li>AI 서비스 기획 및 도입 전략</li>
+            <li>데이터 활용 로드맵/거버넌스</li>
+            <li>단계별 구축·고도화 제안</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="projects">
     <div class="container">
-      <h2>문의</h2>
-      <p>
-        협업 및 구축 문의는 아래 이메일로 연락 주시기 바랍니다.<br>
-        <strong>info@kostlab.co.kr</strong>
-      </p>
+      <h2>주요 수행실적</h2>
+      <p class="sub">기관 공개 없이도 “무엇을 했는지”가 명확하도록 범위 중심으로 기재합니다.</p>
+
+      <div class="table" role="table" aria-label="Projects">
+        <div class="tr th" role="row">
+          <div role="columnheader">구분</div>
+          <div role="columnheader">수행 내용</div>
+          <div role="columnheader">비고</div>
+        </div>
+
+        <div class="tr" role="row">
+          <div class="tag" role="cell">대학</div>
+          <div role="cell">AI 기반 학습지원 플랫폼 구축</div>
+          <div role="cell" style="color:var(--muted); font-weight:650;">구축/고도화</div>
+        </div>
+
+        <div class="tr" role="row">
+          <div class="tag" role="cell">대학</div>
+          <div role="cell">데이터 통합 분석 플랫폼 고도화</div>
+          <div role="cell" style="color:var(--muted); font-weight:650;">권한/통계/대시보드</div>
+        </div>
+
+        <div class="tr" role="row">
+          <div class="tag" role="cell">공공·기관</div>
+          <div role="cell">GenAI 서비스 플랫폼 구축</div>
+          <div role="cell" style="color:var(--muted); font-weight:650;">운영/비용/토큰</div>
+        </div>
+
+        <div class="tr" role="row">
+          <div class="tag" role="cell">기업</div>
+          <div role="cell">AI 서비스 연계 및 운영 플랫폼 구축</div>
+          <div role="cell" style="color:var(--muted); font-weight:650;">연계/보안/운영</div>
+        </div>
+      </div>
+
+      <p class="note"><strong>안내</strong> 고객사 요청 및 보안 정책에 따라 기관명/세부 내용은 비공개 처리합니다.</p>
     </div>
   </section>
 
+  <section id="contact" class="alt">
+    <div class="container">
+      <h2>문의하기</h2>
+      <p class="sub">프로젝트 목적과 환경을 충분히 이해한 후, 가장 적합한 방향을 제안드립니다.</p>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>연락처</h3>
+          <p class="p">
+            이메일: <a href="mailto:info@kostlab.co.kr" style="color:var(--brand); font-weight:900; text-decoration:none;">info@kostlab.co.kr</a><br>
+            웹사이트: kostlab.co.kr
+          </p>
+          <p class="note">* 문의 폼이 필요하면 Google Form 또는 간단한 폼(무료)도 연결 가능합니다.</p>
+        </div>
+
+        <div class="panel">
+          <h3>협업 요청 시 포함하면 좋은 내용</h3>
+          <ul class="bullets">
+            <li>프로젝트 목적(학습지원/행정지원/데이터분석 등)</li>
+            <li>일정(착수 희망 시점 / 마감)</li>
+            <li>현재 환경(온프레미스/클라우드/혼합)</li>
+            <li>연계 대상 시스템(LMS/학사/SSO 등)</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer style="margin-top:24px;">
+        <div class="container f-inner">
+          <div>© KostLab. All Rights Reserved.</div>
+          <div class="f-links">
+            <a href="#top">Top</a> · <a href="#about">About</a> · <a href="#services">Services</a> · <a href="#projects">Projects</a> · <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </section>
 </main>
-
-<footer>
-  <div class="container">
-    © KostLab. All Rights Reserved. | kostlab.co.kr
-  </div>
-</footer>
-
 </body>
 </html>
