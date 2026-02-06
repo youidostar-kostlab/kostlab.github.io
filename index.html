@@ -39,47 +39,26 @@
     a{color:inherit}
     .container{max-width:var(--max); margin:0 auto; padding:0 22px;}
 
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
-    }
-    .h-inner{
-      height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
-    }
-    .brand-name{
-      display:flex; flex-direction:column; line-height:1.1;
-    }
-    .brand-name strong{font-weight:900; letter-spacing:.2px;}
-    .brand-name span{font-size:12px; color:var(--muted); font-weight:700;}
+<header>
+  <div class="container h-inner">
+    <a class="brand" href="#top">
+      <!-- 로고 파일 불러오기 -->
+      <img src="assets/logo.svg" class="kl-logo" alt="KostLab 로고" />
 
-    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
-    nav a{
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:800;
-      font-size:14px;
-      padding:10px 12px;
-      border-radius:12px;
-    }
-    nav a:hover{background:#f1f5ff; color:#1f2a44;}
-    .cta{
-      background: var(--brand);
-      color:#fff !important;
-      border:1px solid rgba(29,78,216,.25);
-      box-shadow: 0 8px 20px rgba(29,78,216,.18);
-    }
-    .cta:hover{filter:brightness(1.02);}
+      <span class="brand-name">
+        <strong>KostLab</strong>
+        <span>AI · Data · Cloud</span>
+      </span>
+    </a>
+
+    <nav>
+      <a href="#about">회사소개</a>
+      <a href="#services">사업영역</a>
+      <a href="#projects">수행실적</a>
+      <a href="#contact" class="cta">문의</a>
+    </nav>
+  </div>
+</header>
 
     /* Hero */
     .hero{
