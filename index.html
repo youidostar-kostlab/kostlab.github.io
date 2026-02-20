@@ -3,445 +3,265 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KostLab | 데이터 통제형 엔터프라이즈 AI·데이터 플랫폼</title>
-  <meta name="description" content="KostLab은 기업·공공·교육 환경에 최적화된 데이터 통제형 AI·데이터 플랫폼을 설계·구축합니다. On-Premise / Gov Cloud / Hybrid 지원." />
+  <title>KostLab | Enterprise AI Platform</title>
+  <meta name="description" content="KostLab은 데이터·RAG·운영을 하나의 흐름으로 연결하는 엔터프라이즈 AI 플랫폼을 제공합니다." />
 
-  <!-- 한글 폰트 (웹에서 렌더링 → 깨짐 방지) -->
+  <!-- ✅ 한글 안 깨지게: Noto Sans KR (GitHub Pages에서도 정상) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-
-  <meta property="og:title" content="KostLab" />
-  <meta property="og:description" content="데이터 통제형 엔터프라이즈 AI·데이터 플랫폼 구축" />
-  <meta property="og:type" content="website" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b1020;
-      --bg2:#0b1630;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.09);
-      --line: rgba(255,255,255,.10);
-      --text:#eaf0ff;
-      --muted: rgba(234,240,255,.74);
-      --muted2: rgba(234,240,255,.56);
+      --bg0:#070B14;
+      --bg1:#0B1220;
+      --bg2:#0F1A2C;
+      --card:#0E1A2B;
+      --card2:#0C1526;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.14);
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.72);
 
-      --brand:#3b82f6;
-      --brand2:#22d3ee;
-      --brand3:#a78bfa;
-      --good:#34d399;
-      --warn:#f59e0b;
+      --brand:#6EA8FF;     /* 메인 블루 */
+      --brand2:#6CF0D2;    /* 민트 */
+      --brand3:#B39CFF;    /* 퍼플 */
+      --warning:#FFCF5A;
 
-      --shadow: 0 18px 50px rgba(0,0,0,.38);
-      --shadow2: 0 10px 28px rgba(0,0,0,.26);
-
+      --shadow: 0 14px 50px rgba(0,0,0,.45);
       --radius:18px;
-      --radius2:26px;
-      --max:1180px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --radius2:24px;
+      --max:1160px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: var(--sans);
-      color: var(--text);
+      font-family:"Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(1200px 520px at 18% 0%, rgba(59,130,246,.28), transparent 55%),
-        radial-gradient(900px 420px at 88% 8%, rgba(34,211,238,.22), transparent 55%),
-        radial-gradient(900px 520px at 65% 90%, rgba(167,139,250,.20), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      overflow-x:hidden;
+        radial-gradient(900px 400px at 15% 0%, rgba(110,168,255,.18), transparent 60%),
+        radial-gradient(900px 420px at 90% 10%, rgba(108,240,210,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 25%, var(--bg2));
     }
-    a{color:inherit}
 
+    a{color:inherit}
     .container{max-width:var(--max); margin:0 auto; padding:0 22px;}
-    .muted{color:var(--muted)}
-    .muted2{color:var(--muted2)}
+    .grid{display:grid; gap:18px;}
     .pill{
       display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px; border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-weight:900;
-      font-size:12px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-weight:800;
       letter-spacing:.02em;
-      backdrop-filter: blur(10px);
+      font-size:12px;
     }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: linear-gradient(135deg,var(--brand),var(--brand2));
-      box-shadow: 0 0 0 6px rgba(59,130,246,.10);
+    .pill .dot{width:8px;height:8px;border-radius:50%;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow:0 0 0 4px rgba(110,168,255,.12);
     }
 
     /* Header */
     header{
       position:sticky; top:0; z-index:50;
-      background: rgba(11,16,32,.70);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      background:rgba(7,11,20,.72);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
     }
     .h-inner{
       height:74px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
     }
     .brand{
-      display:flex; gap:12px; align-items:center;
+      display:flex; align-items:center; gap:12px;
       text-decoration:none;
     }
     .logo{
-      width:38px; height:38px; flex:0 0 auto;
-      border-radius:14px;
-      background: linear-gradient(135deg, rgba(59,130,246,.95), rgba(34,211,238,.85));
-      box-shadow: 0 10px 30px rgba(59,130,246,.20);
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.18);
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(110,168,255,.95), rgba(108,240,210,.85));
+      box-shadow:0 14px 40px rgba(110,168,255,.20);
+      position:relative;
+      overflow:hidden;
     }
-    .brand strong{font-size:16px; font-weight:950; letter-spacing:.2px;}
-    .brand .tagline{display:block; font-size:12px; color:var(--muted2); font-weight:800; margin-top:2px;}
+    .logo:before{
+      content:"";
+      position:absolute; inset:-20%;
+      background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.55), transparent 55%);
+      transform:rotate(18deg);
+      opacity:.55;
+    }
+    .brand-name{display:flex; flex-direction:column; line-height:1.05}
+    .brand-name strong{font-weight:900; letter-spacing:.2px}
+    .brand-name span{font-size:12px; color:var(--muted); font-weight:800}
 
-    nav{display:flex; gap:6px; align-items:center; flex-wrap:wrap;}
+    nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
     nav a{
       text-decoration:none;
-      padding:10px 12px;
-      border-radius:12px;
       color:var(--muted);
       font-weight:900;
       font-size:13px;
+      padding:10px 12px;
+      border-radius:12px;
       border:1px solid transparent;
     }
     nav a:hover{
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
-      color: var(--text);
+      background:rgba(255,255,255,.05);
+      border-color:var(--line);
+      color:var(--text);
     }
     .cta{
-      background: linear-gradient(135deg, rgba(59,130,246,.95), rgba(34,211,238,.85));
-      color:#051024 !important;
-      border:1px solid rgba(255,255,255,.22);
-      box-shadow: 0 14px 40px rgba(59,130,246,.18);
+      background:linear-gradient(135deg, rgba(110,168,255,.95), rgba(179,156,255,.85));
+      color:#081026 !important;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 14px 40px rgba(110,168,255,.16);
     }
     .cta:hover{filter:brightness(1.05)}
 
-    .menu{
-      display:none;
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-    }
-    .menu svg{width:20px; height:20px}
-
     /* Hero */
-    .hero{padding:70px 0 32px; position:relative;}
-    .hero-grid{
+    .hero{padding:56px 0 26px;}
+    .hero-wrap{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
       align-items:start;
     }
     h1{
-      margin:14px 0 10px;
-      font-size:46px;
+      margin:14px 0 12px;
+      font-size:44px;
+      letter-spacing:-.02em;
       line-height:1.08;
-      letter-spacing:-.03em;
     }
     .lead{
       margin:0;
       color:var(--muted);
-      font-size:16px;
       line-height:1.85;
+      font-weight:600;
+      font-size:16px;
       max-width:760px;
-      font-weight:650;
     }
     .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
     .btn{
       height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding:0 16px;
-      display:inline-flex; align-items:center; justify-content:center;
       border-radius:14px;
-      font-weight:950;
       text-decoration:none;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      font-weight:900;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
       color:var(--text);
-      box-shadow: 0 10px 24px rgba(0,0,0,.20);
+      transition:.15s ease;
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 14px 34px rgba(0,0,0,.28);}
+    .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
     .btn-primary{
-      background: linear-gradient(135deg, rgba(59,130,246,.95), rgba(34,211,238,.85));
-      color:#051024;
-      border-color: rgba(255,255,255,.20);
+      border-color:rgba(110,168,255,.35);
+      background:linear-gradient(135deg, rgba(110,168,255,.95), rgba(108,240,210,.80));
+      color:#071022;
     }
-
-    .strip{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(4,1fr);
-      gap:12px;
-    }
-    .strip .item{
-      padding:14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-weight:800;
-      line-height:1.6;
-      font-size:13px;
-    }
-
-    .hero-side{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-side:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(600px 260px at 20% 0%, rgba(59,130,246,.22), transparent 55%),
-                  radial-gradient(520px 260px at 90% 10%, rgba(34,211,238,.18), transparent 60%);
-      z-index:0;
-    }
-    .hero-side > *{position:relative; z-index:1;}
-
-    .kpis{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-    .kpi{
-      padding:14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .kpi strong{display:block; font-size:16px; letter-spacing:-.02em;}
-    .kpi span{display:block; color:var(--muted2); font-weight:750; font-size:12px; margin-top:4px; line-height:1.5;}
-
-    /* Sections */
-    section{padding:58px 0; border-top: 1px solid rgba(255,255,255,.08);}
-    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:16px;}
-    h2{margin:0; font-size:28px; letter-spacing:-.02em;}
-    .sub{margin:10px 0 0; max-width:860px; color:var(--muted); line-height:1.85; font-weight:650;}
-
-    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
 
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
       padding:18px;
-      overflow:hidden;
-      position:relative;
     }
-    .card h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em;}
-    .card p{margin:0; color:var(--muted); line-height:1.85; font-weight:650;}
-    .bullets{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.9; font-weight:650;}
+    .card h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px;}
+    .list li{color:var(--muted); font-weight:700; line-height:1.6;}
+    .list li b{color:var(--text)}
 
-    .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
-    .chip{
-      font-size:12px; font-weight:950;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      color: var(--text);
-      width:max-content;
-    }
-    .chip.blue{background: rgba(59,130,246,.14); border-color: rgba(59,130,246,.24);}
-    .chip.cyan{background: rgba(34,211,238,.14); border-color: rgba(34,211,238,.24);}
-    .chip.purple{background: rgba(167,139,250,.14); border-color: rgba(167,139,250,.24);}
-    .chip.green{background: rgba(52,211,153,.14); border-color: rgba(52,211,153,.24);}
-    .chip.gray{background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: var(--muted);}
+    /* Section */
+    section{padding:52px 0; border-top:1px solid var(--line);}
+    .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:14px; flex-wrap:wrap;}
+    h2{margin:0; font-size:28px; letter-spacing:-.01em}
+    .sub{margin:10px 0 0; color:var(--muted); line-height:1.9; font-weight:600; max-width:860px}
 
-    /* Illustration blocks */
-    .illus{
-      width:100%;
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-      margin-top:12px;
-    }
-    .illus .cap{
-      padding:12px 14px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      display:flex; align-items:center; justify-content:space-between;
-      color: var(--muted2);
-      font-size:12px;
-      font-weight:900;
-    }
-    .illus svg{width:100%; height:auto; display:block}
-
-    /* Projects table */
-    .table{
-      margin-top:16px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      overflow:hidden;
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow2);
-    }
-    .tr{
+    .two{
       display:grid;
-      grid-template-columns: 140px 1fr 200px;
-      gap:12px;
-      padding:14px 16px;
-      border-top:1px solid rgba(255,255,255,.08);
-      align-items:center;
-    }
-    .tr:first-child{border-top:0;}
-    .th{
-      background: rgba(255,255,255,.05);
-      font-weight:950;
-      color: rgba(234,240,255,.92);
-    }
-    .tag{
-      display:inline-flex; align-items:center; justify-content:center;
-      height:26px; padding:0 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      color: rgba(234,240,255,.90);
-      font-weight:950;
-      font-size:12px;
-      width:max-content;
-    }
-    .note{margin-top:12px; color: var(--muted2); font-size:13px; line-height:1.7; font-weight:650;}
-
-    /* Proof area */
-    .proof-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr 1fr;
       gap:16px;
-      margin-top:16px;
+      margin-top:18px;
       align-items:start;
     }
-    .codebox{
-      font-family: var(--mono);
-      font-size:12px;
-      line-height:1.7;
-      color: rgba(234,240,255,.88);
-      background: rgba(0,0,0,.28);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      padding:14px;
-      overflow:auto;
-      max-height:280px;
-    }
-    .kv{display:grid; gap:10px;}
-    .kv .row2{
-      padding:14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-    }
-    .kv .row2 strong{display:block; font-weight:950;}
-    .kv .row2 span{display:block; margin-top:6px; color:var(--muted); font-weight:650; line-height:1.75;}
 
-    /* CTA block */
-    .cta-block{
-      padding:22px;
-      border-radius: var(--radius2);
-      border:1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(700px 240px at 10% 0%, rgba(59,130,246,.25), transparent 55%),
-        radial-gradient(700px 260px at 90% 10%, rgba(34,211,238,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      box-shadow: var(--shadow);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+      padding:18px;
+      overflow:hidden;
     }
-    .cta-block h3{margin:0; font-size:18px; font-weight:950;}
-    .cta-block p{margin:6px 0 0; color:var(--muted); font-weight:650; line-height:1.8;}
-    .cta-actions{display:flex; gap:10px; flex-wrap:wrap;}
+    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
+    .p{margin:0; color:var(--muted); line-height:1.9; font-weight:600}
+    .bullets{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.9; font-weight:650}
+    .bullets li{margin:4px 0}
+
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .kpi .mini{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:12px;
+    }
+    .mini b{display:block; font-size:13px; letter-spacing:-.01em}
+    .mini span{display:block; margin-top:6px; color:var(--muted); font-weight:700; line-height:1.5}
+
+    /* SVG figure */
+    .figure{
+      border:1px solid var(--line2);
+      border-radius:22px;
+      background:radial-gradient(900px 380px at 20% 0%, rgba(110,168,255,.14), transparent 55%),
+                 radial-gradient(700px 320px at 80% 30%, rgba(108,240,210,.10), transparent 60%),
+                 linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:0 26px 90px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+    .figure .cap{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+    .figure .cap b{color:var(--text)}
+    .figure .svg-wrap{padding:14px;}
 
     /* Footer */
     footer{
-      padding:30px 0 40px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: var(--muted2);
+      padding:28px 0 40px;
+      border-top:1px solid var(--line);
+      color:rgba(234,240,255,.65);
       font-size:13px;
       font-weight:650;
     }
-    .f-inner{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;}
-    .f-links a{color: var(--muted); text-decoration:none; font-weight:900;}
-    .f-links a:hover{text-decoration:underline;}
+    .f-inner{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+    .f-inner a{color:rgba(234,240,255,.75); text-decoration:none; font-weight:900}
+    .f-inner a:hover{text-decoration:underline}
 
-    /* reveal */
-    .reveal{opacity:0; transform: translateY(10px); transition: all .6s ease;}
-    .reveal.on{opacity:1; transform: translateY(0);}
-
-    /* responsive */
+    /* Responsive */
     @media (max-width: 980px){
       nav{display:none;}
-      .menu{display:inline-flex; align-items:center; justify-content:center;}
-      .hero-grid{grid-template-columns:1fr;}
+      .hero-wrap{grid-template-columns:1fr;}
+      .two{grid-template-columns:1fr;}
+      .kpi{grid-template-columns:1fr;}
       h1{font-size:36px;}
-      .grid-2{grid-template-columns:1fr;}
-      .grid-3{grid-template-columns:1fr;}
-      .strip{grid-template-columns:1fr 1fr;}
-      .proof-grid{grid-template-columns:1fr;}
-      .tr{grid-template-columns: 1fr;}
-    }
-
-    /* Mobile drawer */
-    .drawer{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:flex-start;
-      justify-content:flex-end;
-      z-index:60;
-    }
-    .drawer.on{display:flex;}
-    .panel-d{
-      width:min(360px, 92vw);
-      height:100%;
-      background: rgba(11,16,32,.92);
-      border-left:1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(14px);
-      padding:14px;
-    }
-    .d-top{display:flex; justify-content:space-between; align-items:center; padding:8px 6px;}
-    .d-top strong{font-weight:950;}
-    .d-links{display:grid; gap:8px; padding:10px 6px;}
-    .d-links a{
-      text-decoration:none;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight:900;
-    }
-    .d-links a.cta2{
-      background: linear-gradient(135deg, rgba(59,130,246,.95), rgba(34,211,238,.85));
-      color:#051024;
-      border-color: rgba(255,255,255,.18);
-    }
-    .xbtn{
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      display:grid; place-items:center;
     }
   </style>
 </head>
@@ -450,278 +270,148 @@
 <header>
   <div class="container h-inner">
     <a class="brand" href="#top" aria-label="KostLab Home">
-      <span class="logo" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" role="img" aria-label="K">
-          <path d="M7 19V5h3v6l6-6h4l-7 7 7 7h-4l-6-6v6H7z" fill="#06122a" opacity="0.92"/>
-        </svg>
-      </span>
-      <span>
+      <div class="logo" aria-hidden="true"></div>
+      <div class="brand-name">
         <strong>KostLab</strong>
-        <span class="tagline">Enterprise AI · Data Platform</span>
-      </span>
+        <span>Enterprise AI Platform · RAG · Governance</span>
+      </div>
     </a>
 
     <nav aria-label="Primary">
-      <a href="#about">회사소개</a>
-      <a href="#services">사업영역</a>
-      <a href="#product">제품구성</a>
-      <a href="#architecture">아키텍처</a>
-      <a href="#deployment">도입모델</a>
-      <a href="#projects">수행실적</a>
-      <a href="#contact" class="cta">문의</a>
+      <a href="#problem">문제</a>
+      <a href="#overview">제품개요</a>
+      <a href="#rag">RAG</a>
+      <a href="#deploy">배포옵션</a>
+      <a href="#security">보안/증명</a>
+      <a class="cta" href="#contact">문의</a>
     </nav>
-
-    <button class="menu" id="openMenu" aria-label="Open Menu">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
   </div>
 </header>
-
-<!-- Mobile drawer -->
-<div class="drawer" id="drawer" aria-hidden="true">
-  <div class="panel-d" role="dialog" aria-modal="true" aria-label="Mobile Menu">
-    <div class="d-top">
-      <strong>Menu</strong>
-      <button class="xbtn" id="closeMenu" aria-label="Close Menu">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-    <div class="d-links">
-      <a href="#about" class="dlink">회사소개</a>
-      <a href="#services" class="dlink">사업영역</a>
-      <a href="#product" class="dlink">제품구성</a>
-      <a href="#architecture" class="dlink">아키텍처</a>
-      <a href="#deployment" class="dlink">도입모델</a>
-      <a href="#projects" class="dlink">수행실적</a>
-      <a href="#contact" class="dlink cta2">문의</a>
-    </div>
-  </div>
-</div>
 
 <main id="top">
   <!-- HERO -->
   <div class="hero">
-    <div class="container hero-grid">
-      <div class="reveal">
-        <span class="pill"><span class="dot"></span>데이터 통제형 엔터프라이즈 AI 구축</span>
+    <div class="container hero-wrap">
+      <div>
+        <span class="pill"><span class="dot"></span>기업·대학·기관용 “데이터 통제형” AI 플랫폼</span>
         <h1>
-          AI를 믿으라고 말하지 않습니다.<br/>
-          AI가 볼 수 있는 범위를
-          <span style="background:linear-gradient(135deg,var(--brand),var(--brand2)); -webkit-background-clip:text; background-clip:text; color:transparent;">구조로 제한</span>합니다.
+          데이터는 조직 안에 두고,<br>
+          AI는 “근거 기반(RAG)”으로만 답하게
         </h1>
         <p class="lead">
-          코스트랩(KostLab)은 교육·공공·기업 환경에 최적화된 AI·데이터 플랫폼을 <strong>설계·구축</strong>합니다.
-          단기 성과보다 <strong>지속 가능한 운영</strong>을 우선하며, On-Premise / Gov Cloud / Hybrid 도입을 지원합니다.
+          KostLab은 <b>포털/업무/LMS</b> 같은 기존 시스템 위에 AI를 덧대는 방식으로,
+          <b>데이터 수집 → RAG 구성 → 서비스 배포 → 운영/비용 통제</b>까지
+          한 흐름으로 연결합니다.
         </p>
+
         <div class="actions">
-          <a class="btn btn-primary" href="#contact">협업/구축 문의</a>
-          <a class="btn" href="#architecture">아키텍처 보기</a>
+          <a class="btn btn-primary" href="#contact">데모/도입 상담</a>
+          <a class="btn" href="#overview">제품 구조 보기</a>
         </div>
 
-        <div class="strip">
-          <div class="item">🔒 <strong>원문 반출 최소화</strong><br/>RAG로 필요한 문장만 전달</div>
-          <div class="item">🧭 <strong>권한·정책 기반</strong><br/>역할/부서 단위 접근 통제</div>
-          <div class="item">🧾 <strong>감사로그</strong><br/>요청/엔진/문맥 기록</div>
-          <div class="item">🔁 <strong>엔진 교체형</strong><br/>LLM 종속 최소화</div>
+        <div class="kpi">
+          <div class="mini">
+            <b>데이터 반출 최소화</b>
+            <span>원문은 내부 보관, 필요 부분만 검색·참조</span>
+          </div>
+          <div class="mini">
+            <b>운영/비용 통제</b>
+            <span>사용량·토큰·정책·권한을 중앙에서 관리</span>
+          </div>
+          <div class="mini">
+            <b>클라우드/온프렘/하이브리드</b>
+            <span>조직 보안정책에 맞춘 배포 선택</span>
+          </div>
         </div>
       </div>
 
-      <aside class="hero-side reveal" aria-label="KPI & Overview">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span class="pill" style="gap:8px;"><span class="dot" style="width:7px;height:7px;box-shadow:none;"></span>제품 소개서 요약</span>
-          <span class="muted2" style="font-weight:900; font-size:12px;">v1.0</span>
-        </div>
-
-        <div style="margin-top:10px;">
-          <div style="font-weight:950; font-size:16px; letter-spacing:-.01em;">핵심 구성요소</div>
-          <p class="muted" style="margin:8px 0 0; line-height:1.8; font-weight:650;">
-            UI 통합 · 설계/개발 · 데이터/RAG · 운영/비용 통제
-          </p>
-        </div>
-
-        <div class="kpis">
-          <div class="kpi"><strong>RAG</strong><span>근거 기반 지식 응답</span></div>
-          <div class="kpi"><strong>Policy</strong><span>권한/마스킹/금칙</span></div>
-          <div class="kpi"><strong>Audit</strong><span>로그/추적/리포트</span></div>
-          <div class="kpi"><strong>Hybrid</strong><span>내부/외부 엔진 선택</span></div>
-        </div>
-
-        <!-- HERO SVG: "제품 개요" (텍스트 포함) -->
-        <div class="illus" style="margin-top:14px;">
-          <div class="cap">
-            <span>제품 개요 (Overview)</span>
-            <span class="muted2">데이터 통제형 엔터프라이즈 AI 플랫폼</span>
-          </div>
-          <svg viewBox="0 0 980 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="제품 개요 다이어그램">
-            <defs>
-              <linearGradient id="ov_g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#3b82f6" stop-opacity=".95"/>
-                <stop offset="1" stop-color="#22d3ee" stop-opacity=".85"/>
-              </linearGradient>
-              <linearGradient id="ov_g2" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#a78bfa" stop-opacity=".85"/>
-                <stop offset="1" stop-color="#3b82f6" stop-opacity=".55"/>
-              </linearGradient>
-              <filter id="ov_sh" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".30"/>
-              </filter>
-              <style>
-                .tH{font: 900 20px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.95);}
-                .tS{font: 700 13px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.72);}
-                .tM{font: 800 14px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.90);}
-                .tK{font: 900 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.62); letter-spacing:.02em;}
-              </style>
-            </defs>
-
-            <rect width="980" height="520" fill="rgba(255,255,255,0.02)"/>
-
-            <!-- Left: Legacy Systems -->
-            <g filter="url(#ov_sh)">
-              <rect x="56" y="92" width="250" height="120" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
-              <rect x="56" y="232" width="250" height="120" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
-              <rect x="56" y="372" width="250" height="86" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)"/>
-            </g>
-            <text x="82" y="122" class="tH">기존 시스템</text>
-            <text x="82" y="148" class="tS">포털 · 업무 · 행정 · LMS</text>
-            <text x="82" y="262" class="tM">데이터 소스</text>
-            <text x="82" y="286" class="tS">DB · 문서 · 게시판 · 콘텐츠</text>
-            <text x="82" y="402" class="tM">사용자/조직</text>
-            <text x="82" y="426" class="tS">SSO · 역할(Role) · 부서</text>
-
-            <!-- Center: Data/RAG Layer -->
-            <g filter="url(#ov_sh)">
-              <rect x="350" y="132" width="280" height="280" rx="22" fill="rgba(59,130,246,0.12)" stroke="rgba(59,130,246,0.30)"/>
-              <rect x="376" y="170" width="228" height="54" rx="16" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-              <rect x="376" y="238" width="228" height="54" rx="16" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-              <rect x="376" y="306" width="228" height="54" rx="16" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="490" cy="110" r="22" fill="url(#ov_g1)" opacity=".92"/>
-            </g>
-            <text x="378" y="160" class="tH">데이터·RAG 레이어</text>
-            <text x="392" y="204" class="tM">수집 · 정제</text>
-            <text x="392" y="228" class="tS">커넥터/동기화/표준화</text>
-            <text x="392" y="272" class="tM">벡터 인덱스</text>
-            <text x="392" y="296" class="tS">검색 품질/메타데이터</text>
-            <text x="392" y="340" class="tM">정책·권한</text>
-            <text x="392" y="364" class="tS">마스킹/금칙/접근 통제</text>
-
-            <!-- Right: AI & Service -->
-            <g filter="url(#ov_sh)">
-              <rect x="672" y="96" width="252" height="136" rx="22" fill="rgba(34,211,238,0.10)" stroke="rgba(34,211,238,0.28)"/>
-              <rect x="672" y="252" width="252" height="136" rx="22" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.28)"/>
-              <rect x="672" y="404" width="252" height="60" rx="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-            </g>
-            <text x="698" y="126" class="tH">추론 엔진</text>
-            <text x="698" y="152" class="tS">내부 LLM · 외부 LLM</text>
-            <text x="698" y="204" class="tK">* 엔진 교체형 설계</text>
-
-            <text x="698" y="282" class="tH">서비스 레이어</text>
-            <text x="698" y="308" class="tS">챗봇 · 검색 · 요약 · 자동화</text>
-
-            <text x="698" y="440" class="tM">운영 대시보드</text>
-            <text x="830" y="440" class="tS" text-anchor="end">사용량 · 비용 · 로그</text>
-
-            <!-- Connectors -->
-            <path d="M306 150C330 150 330 150 350 210" stroke="rgba(59,130,246,.60)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M306 292C330 292 330 292 350 272" stroke="rgba(34,211,238,.55)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M306 416C330 416 330 416 350 332" stroke="rgba(167,139,250,.55)" stroke-width="4" fill="none" stroke-linecap="round"/>
-
-            <path d="M630 252C652 252 652 252 672 164" stroke="rgba(34,211,238,.55)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M630 292C652 292 652 292 672 320" stroke="rgba(167,139,250,.55)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M630 332C652 332 652 332 672 434" stroke="rgba(255,255,255,.25)" stroke-width="4" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
+      <aside class="card">
+        <h3>웹사이트에서 “증명처럼” 보여줄 포인트</h3>
+        <ul class="list">
+          <li>✅ <b>데이터 경로</b>: “원문은 내부에 남고, 검색 결과(근거)만 컨텍스트로 전달”</li>
+          <li>✅ <b>통제</b>: “권한/마스킹/감사로그/차단 정책”을 제품 기능으로 제공</li>
+          <li>✅ <b>배포옵션</b>: “On-Prem / Gov Cloud / Hybrid”를 그림 1장씩 명확히</li>
+        </ul>
       </aside>
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
+  <!-- PROBLEM -->
+  <section id="problem">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <div>
-          <h2>회사소개</h2>
+          <h2>문제 정의</h2>
           <p class="sub">
-            주식회사 코스트랩(KostLab)은 데이터·인공지능(AI)·클라우드 기술을 기반으로
-            교육기관 및 공공·기업 고객의 디지털 전환을 지원하는 기술 중심 솔루션 기업입니다.
-            요구사항 분석 → 설계 → 구축 → 운영까지 <strong>일관된 관점</strong>으로 지원합니다.
+            시스템과 데이터는 쌓이는데, 현장 성과는 정체되는 이유는 “연결”과 “운영”이 분리되어 있기 때문입니다.
+            AI를 붙여도 PoC에서 멈추는 경우가 많습니다.
           </p>
         </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card reveal">
-          <h3>우리가 하는 일</h3>
-          <p>
-            단순 도입이 아니라, 조직과 업무에 실제로 정착되는 플랫폼 구축을 목표로 합니다.
-            AI 서비스·데이터·운영이 분리되지 않도록 “하나의 흐름”으로 설계합니다.
-          </p>
+      <div class="two">
+        <div class="panel">
+          <h3>왜 기존 방식이 막히는가</h3>
           <ul class="bullets">
-            <li>AI 서비스 기획 및 도입 전략 수립</li>
-            <li>데이터 수집·정제·분석 파이프라인 구축</li>
-            <li>권한·감사·운영 통제 기반 플랫폼 설계</li>
+            <li><b>시스템은 많아졌는데</b> 포털/LMS/업무/행정이 분절되어 UX가 끊김</li>
+            <li><b>데이터는 쌓이지만</b> 분석·활용이 “보고용”에 머무름</li>
+            <li><b>AI를 붙여도</b> 보안·권한·감사·운영이 설계되지 않아 확산이 어려움</li>
           </ul>
-          <div class="chip-row">
-            <span class="chip blue">AI</span>
-            <span class="chip cyan">Data</span>
-            <span class="chip purple">Cloud</span>
-            <span class="chip gray">Operations</span>
-          </div>
+          <p class="p" style="margin-top:12px;">
+            그래서 “AI 모델”만이 아니라, <b>데이터 레이어 + RAG + 운영관리</b>까지 포함된 플랫폼 구조가 필요합니다.
+          </p>
         </div>
 
-        <div class="card reveal">
-          <h3>회사 정보</h3>
-          <ul class="bullets">
-            <li><strong>회사명</strong> : 주식회사 코스트랩 (KostLab)</li>
-            <li><strong>설립</strong> : 2020년</li>
-            <li><strong>소재지</strong> : 경기도 성남시</li>
-            <li><strong>도메인</strong> : kostlab.co.kr</li>
-          </ul>
-
-          <!-- ABOUT SVG: "왜 AI가 정착되지 않는가" -->
-          <div class="illus">
-            <div class="cap">
-              <span>문제 정의 (Problem)</span>
-              <span class="muted2">데이터는 쌓이는데 성과는 정체</span>
-            </div>
-            <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="문제 정의 다이어그램">
+        <!-- ✅ 인라인 SVG: 문제정의 (글자 크게) -->
+        <div class="figure">
+          <div class="cap"><b>문제 정의 (Problem)</b><span>데이터는 쌓이는데 성과는 정체</span></div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 920 380" width="100%" height="auto" role="img" aria-label="문제 정의 다이어그램">
               <defs>
-                <filter id="pb_sh" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".28"/>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="rgba(110,168,255,.30)"/>
+                  <stop offset="1" stop-color="rgba(108,240,210,.18)"/>
+                </linearGradient>
+                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="rgba(0,0,0,.45)"/>
                 </filter>
-                <style>
-                  .pH{font: 900 18px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.92);}
-                  .pS{font: 700 13px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.70);}
-                  .pK{font: 900 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.58); letter-spacing:.02em;}
-                </style>
               </defs>
 
-              <rect width="980" height="360" fill="rgba(255,255,255,0.02)"/>
+              <rect x="18" y="18" width="884" height="344" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
+              <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">시스템은 많아졌는데</text>
+              <text x="52" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">포털 / 업무 / 행정 / LMS가 분절</text>
 
-              <g filter="url(#pb_sh)">
-                <rect x="70" y="86" width="260" height="190" rx="22" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
-                <rect x="360" y="86" width="260" height="190" rx="22" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
-                <rect x="650" y="86" width="260" height="190" rx="22" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+              <text x="352" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">데이터는 쌓이지만</text>
+              <text x="352" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">분석·활용이 제한, 보고용으로만 사용</text>
+
+              <text x="648" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">AI를 붙여도</text>
+              <text x="648" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">운영/보안/권한이 없어 확산 어려움</text>
+
+              <!-- Cards -->
+              <g filter="url(#shadow)">
+                <rect x="52" y="145" width="252" height="170" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="78" y="188" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">분절된 UX</text>
+                <text x="78" y="218" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">사용자 경로가 끊기고</text>
+                <text x="78" y="242" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">AI 활용률이 낮아짐</text>
               </g>
 
-              <text x="96" y="126" class="pH">시스템은 많아졌는데</text>
-              <text x="96" y="154" class="pS">포털/LMS/업무/행정이 분리</text>
-              <text x="96" y="196" class="pK">결과: 사용자 경험(UX) 단절</text>
+              <g filter="url(#shadow)">
+                <rect x="334" y="145" width="252" height="170" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="360" y="188" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">인사이트 부족</text>
+                <text x="360" y="218" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">데이터는 있지만</text>
+                <text x="360" y="242" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">의사결정에 연결되지 않음</text>
+              </g>
 
-              <text x="386" y="126" class="pH">데이터는 쌓이지만</text>
-              <text x="386" y="154" class="pS">분석·활용이 제한적</text>
-              <text x="386" y="196" class="pK">결과: 인사이트/의사결정 지연</text>
+              <g filter="url(#shadow)">
+                <rect x="616" y="145" width="252" height="170" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="642" y="188" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">PoC에서 정지</text>
+                <text x="642" y="218" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">보안/권한/감사</text>
+                <text x="642" y="242" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">운영 설계가 없어 확산 불가</text>
+              </g>
 
-              <text x="676" y="126" class="pH">AI를 붙여도</text>
-              <text x="676" y="154" class="pS">운영/보안/비용 통제가 어려움</text>
-              <text x="676" y="196" class="pK">결과: 확산이 멈추는 PoC</text>
-
-              <!-- arrows -->
-              <path d="M330 182h30" stroke="rgba(59,130,246,.45)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M620 182h30" stroke="rgba(34,211,238,.35)" stroke-width="6" stroke-linecap="round"/>
+              <!-- connectors -->
+              <path d="M304 230 L334 230" stroke="rgba(110,168,255,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M586 230 L616 230" stroke="rgba(179,156,255,.55)" stroke-width="4" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
@@ -729,615 +419,320 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services">
+  <!-- OVERVIEW -->
+  <section id="overview">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <div>
-          <h2>사업영역</h2>
+          <h2>제품 개요</h2>
           <p class="sub">
-            필요한 범위를 정확히 정의하고, 운영 가능한 구조로 구축합니다.
-            교육·공공·기업 환경에서 “도입 이후”를 고려한 설계를 제공합니다.
+            “포털/업무/LMS” 같은 기존 시스템을 그대로 유지하면서,
+            <b>데이터·RAG·서비스·운영</b>을 하나의 플랫폼으로 연결합니다.
           </p>
         </div>
       </div>
 
-      <div class="grid-3">
-        <div class="card reveal">
-          <h3>AI·데이터 플랫폼 구축</h3>
-          <p>AI 기반 학습/행정/업무 지원 서비스를 데이터 기반으로 확장합니다.</p>
-          <ul class="bullets">
-            <li>AI 기반 지식검색·챗봇·업무보조</li>
-            <li>데이터 수집·정제·분석 파이프라인</li>
-            <li>확장형 클라우드 아키텍처</li>
-          </ul>
-          <div class="chip-row">
-            <span class="chip blue">GenAI</span>
-            <span class="chip cyan">Analytics</span>
-            <span class="chip gray">Pipeline</span>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <h3>교육·공공 특화 시스템</h3>
-          <p>기존 시스템(LMS/포털/전자결재) 위에 AI 레이어를 붙입니다.</p>
-          <ul class="bullets">
-            <li>학사·행정 시스템 연계</li>
-            <li>RPA 기반 반복업무 자동화</li>
-            <li>권한·접근제어·감사로그 설계</li>
-          </ul>
-          <div class="chip-row">
-            <span class="chip green">Access Control</span>
-            <span class="chip gray">Audit</span>
-            <span class="chip gray">RPA</span>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <h3>컨설팅 및 설계</h3>
-          <p>기획부터 도입 전략, 거버넌스까지 단계별 로드맵을 제안합니다.</p>
-          <ul class="bullets">
-            <li>AI 서비스 기획 및 도입 전략</li>
-            <li>데이터 활용 로드맵/거버넌스</li>
-            <li>단계별 구축·고도화 제안</li>
-          </ul>
-          <div class="chip-row">
-            <span class="chip purple">Strategy</span>
-            <span class="chip gray">Governance</span>
-            <span class="chip gray">Roadmap</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SERVICES SVG: "한눈에 보는 4가지" -->
-      <div class="illus reveal">
-        <div class="cap">
-          <span>주요 기능 4가지</span>
-          <span class="muted2">UI · 설계/개발 · 데이터/RAG · 운영/통제</span>
-        </div>
-        <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="주요 기능 4가지 다이어그램">
-          <defs>
-            <filter id="sf_sh" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".25"/>
-            </filter>
-            <style>
-              .fH{font: 900 16px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.92);}
-              .fS{font: 700 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.70);}
-              .b1{fill: rgba(59,130,246,.12); stroke: rgba(59,130,246,.28);}
-              .b2{fill: rgba(34,211,238,.10); stroke: rgba(34,211,238,.26);}
-              .b3{fill: rgba(167,139,250,.10); stroke: rgba(167,139,250,.26);}
-              .b4{fill: rgba(52,211,153,.10); stroke: rgba(52,211,153,.26);}
-            </style>
-          </defs>
-          <rect width="980" height="420" fill="rgba(255,255,255,0.02)"/>
-
-          <g filter="url(#sf_sh)">
-            <rect x="70"  y="80" width="400" height="120" rx="22" class="b1"/>
-            <rect x="510" y="80" width="400" height="120" rx="22" class="b2"/>
-            <rect x="70"  y="230" width="400" height="120" rx="22" class="b3"/>
-            <rect x="510" y="230" width="400" height="120" rx="22" class="b4"/>
-          </g>
-
-          <text x="100" y="120" class="fH">AI 서비스 UI 통합</text>
-          <text x="100" y="146" class="fS">포털·LMS·업무 화면에서 바로 사용</text>
-          <text x="100" y="170" class="fS">역할별 메뉴 · 공통 챗 UI · 위젯</text>
-
-          <text x="540" y="120" class="fH">AI 서비스 설계 및 개발</text>
-          <text x="540" y="146" class="fS">노드 기반 설계 · LLM/SLM 조합</text>
-          <text x="540" y="170" class="fS">Low/No-Code · 테스트/배포</text>
-
-          <text x="100" y="270" class="fH">AI 데이터/콘텐츠 관리(RAG)</text>
-          <text x="100" y="296" class="fS">레거시 DB·문서·콘텐츠 수집/정제</text>
-          <text x="100" y="320" class="fS">벡터 인덱스 · 메타데이터 · 권한</text>
-
-          <text x="540" y="270" class="fH">AI 서비스 운영 및 관리</text>
-          <text x="540" y="296" class="fS">사용량/비용/토큰 모니터링</text>
-          <text x="540" y="320" class="fS">정책/할당량/로그·리포트</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCT (Detailed) -->
-  <section id="product">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <h2>제품구성</h2>
-          <p class="sub">
-            “AI 하나”가 아니라, 설계–개발–데이터–운영이 하나의 흐름으로 이어지는 통합 플랫폼입니다.
-            따로 구축·운영하던 AI 챗봇/지식검색/업무보조 서비스를 일관된 정책과 UX로 제공할 수 있습니다.
+      <div class="two">
+        <div class="panel">
+          <h3>핵심 개념(한 문장)</h3>
+          <p class="p">
+            <b>원문 데이터는 내부에 두고</b>, AI는 <b>RAG로 근거를 찾아</b> 답하도록 하며,
+            운영자는 <b>권한/비용/감사</b>를 중앙에서 통제합니다.
           </p>
-        </div>
-      </div>
 
-      <div class="grid-2">
-        <div class="card reveal">
-          <h3>UI 통합</h3>
-          <p>기존 시스템 화면을 바꾸지 않고, AI 기능만 자연스럽게 확장합니다.</p>
+          <h3 style="margin-top:14px;">플랫폼이 제공하는 4가지</h3>
           <ul class="bullets">
-            <li>포털 로그인/SSO 연동</li>
-            <li>LMS 과목/업무 화면 내 위젯</li>
-            <li>공통 챗봇 URL/버튼</li>
+            <li><b>데이터 통합</b>: DB/문서/게시판/콘텐츠 수집·정제·표준화</li>
+            <li><b>RAG 레이어</b>: 벡터 인덱스 + 메타데이터 + 권한 기반 검색</li>
+            <li><b>서비스 레이어</b>: 챗봇/검색/요약/업무보조를 UI로 제공</li>
+            <li><b>운영관리</b>: 사용자/정책/토큰/비용/로그 대시보드</li>
           </ul>
-          <div class="chip-row">
-            <span class="chip blue">SSO</span>
-            <span class="chip gray">Widget</span>
-            <span class="chip gray">iFrame</span>
-          </div>
         </div>
 
-        <div class="card reveal">
-          <h3>운영 통제</h3>
-          <p>어디서, 얼마나, 왜 쓰이는지 가시화하여 과금/리스크를 선제 통제합니다.</p>
-          <ul class="bullets">
-            <li>서비스·모델·조직 단위 사용량</li>
-            <li>토큰/비용 추정 및 한도</li>
-            <li>오류율·응답시간 모니터링</li>
-          </ul>
-          <div class="chip-row">
-            <span class="chip green">Dashboard</span>
-            <span class="chip gray">Quota</span>
-            <span class="chip gray">Report</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCT SVG: "4계층 구조" -->
-      <div class="illus reveal">
-        <div class="cap">
-          <span>플랫폼 4계층 구조</span>
-          <span class="muted2">인프라 → 데이터 → AI 엔진 → 서비스</span>
-        </div>
-        <svg viewBox="0 0 980 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="플랫폼 4계층 다이어그램">
-          <defs>
-            <filter id="ly_sh" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".25"/>
-            </filter>
-            <style>
-              .lH{font: 900 16px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.92);}
-              .lS{font: 700 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.70);}
-            </style>
-          </defs>
-          <rect width="980" height="460" fill="rgba(255,255,255,0.02)"/>
-          <g filter="url(#ly_sh)">
-            <rect x="110" y="70"  width="760" height="78" rx="18" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.26)"/>
-            <rect x="140" y="170" width="700" height="78" rx="18" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.24)"/>
-            <rect x="170" y="270" width="640" height="78" rx="18" fill="rgba(167,139,250,.10)" stroke="rgba(167,139,250,.24)"/>
-            <rect x="200" y="370" width="580" height="78" rx="18" fill="rgba(52,211,153,.10)" stroke="rgba(52,211,153,.24)"/>
-          </g>
-
-          <text x="140" y="102" class="lH">1. 교육/업무 인프라</text>
-          <text x="140" y="124" class="lS">포털 · LMS · 학사/행정 · 그룹웨어</text>
-
-          <text x="170" y="202" class="lH">2. 데이터 수집·저장 계층</text>
-          <text x="170" y="224" class="lS">수집 · 정규화 · 메타데이터 · 보안/권한</text>
-
-          <text x="200" y="302" class="lH">3. AI 엔진 레이어</text>
-          <text x="200" y="324" class="lS">RAG · 모델 라우팅(내부/외부) · 후처리</text>
-
-          <text x="230" y="402" class="lH">4. 서비스 레이어</text>
-          <text x="230" y="424" class="lS">대시보드 · 챗봇 · 검색 · 요약 · 자동화</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ARCHITECTURE -->
-  <section id="architecture">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <h2>데이터 통제형 아키텍처</h2>
-          <p class="sub">
-            “데이터를 안 보내고 추론만 시킨다”는 주장이 아니라,
-            <strong>보내지 못하게 설계</strong>합니다. (권한·정책·마스킹은 게이트웨이가 강제)
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card reveal">
-          <h3>AI 요청 시 데이터 흐름</h3>
-          <p>원문/DB 전체가 아니라 “발췌된 문장(최소 문맥)”만 전달합니다.</p>
-
-          <div class="illus">
-            <div class="cap">
-              <span>RAG 흐름</span>
-              <span class="muted2">질문 → 검색 → 문맥 → 추론 → 결과</span>
-            </div>
-            <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAG 동작 흐름 다이어그램">
+        <!-- ✅ 인라인 SVG: 제품개요 (글자 크게) -->
+        <div class="figure">
+          <div class="cap"><b>제품 개요 (Overview)</b><span>데이터 통제형 엔터프라이즈 AI 플랫폼</span></div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 920 420" width="100%" height="auto" role="img" aria-label="제품 개요 다이어그램">
               <defs>
-                <filter id="rg_sh" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".22"/>
+                <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="rgba(0,0,0,.45)"/>
                 </filter>
-                <style>
-                  .rH{font: 900 14px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.92);}
-                  .rS{font: 700 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.70);}
-                </style>
               </defs>
-              <rect width="980" height="360" fill="rgba(255,255,255,0.02)"/>
 
-              <g filter="url(#rg_sh)">
-                <rect x="70"  y="120" width="170" height="120" rx="20" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.26)"/>
-                <rect x="270" y="120" width="170" height="120" rx="20" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.24)"/>
-                <rect x="470" y="120" width="170" height="120" rx="20" fill="rgba(167,139,250,.10)" stroke="rgba(167,139,250,.24)"/>
-                <rect x="670" y="120" width="170" height="120" rx="20" fill="rgba(52,211,153,.10)" stroke="rgba(52,211,153,.24)"/>
-                <rect x="840" y="120" width="70"  height="120" rx="20" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+              <rect x="18" y="18" width="884" height="384" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
+
+              <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">기존 시스템</text>
+              <text x="52" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">포털 · 업무 · 행정 · LMS</text>
+
+              <text x="348" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">데이터 · RAG 레이어</text>
+              <text x="348" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">수집 · 정제 · 인덱싱 · 권한검색</text>
+
+              <text x="684" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">서비스/운영</text>
+              <text x="684" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">챗봇 · 검색 · 요약 · 정책/비용</text>
+
+              <!-- left stack -->
+              <g filter="url(#shadow2)">
+                <rect x="52" y="150" width="250" height="88" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="76" y="186" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">데이터 소스</text>
+                <text x="76" y="214" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">DB · 문서 · 게시판 · 콘텐츠</text>
+
+                <rect x="52" y="254" width="250" height="88" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="76" y="290" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">사용자/조직</text>
+                <text x="76" y="318" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">SSO · 역할(Role) · 부서</text>
               </g>
 
-              <text x="95"  y="156" class="rH">사용자 질문</text>
-              <text x="95"  y="178" class="rS">요청 수신</text>
+              <!-- center -->
+              <g filter="url(#shadow2)">
+                <rect x="334" y="150" width="300" height="192" rx="18" fill="rgba(110,168,255,.10)" stroke="rgba(110,168,255,.35)"/>
+                <text x="360" y="186" fill="rgba(234,240,255,.96)" font-size="18" font-weight="900">AXCMS (콘텐츠/권한)</text>
+                <text x="360" y="214" fill="rgba(234,240,255,.72)" font-size="15" font-weight="700">수집 · 정제 · 메타데이터</text>
+                <text x="360" y="238" fill="rgba(234,240,255,.72)" font-size="15" font-weight="700">권한 · 마스킹 · 감사로그</text>
 
-              <text x="295" y="156" class="rH">지식 검색</text>
-              <text x="295" y="178" class="rS">RAG Retrieval</text>
+                <rect x="354" y="258" width="260" height="70" rx="16" fill="rgba(179,156,255,.10)" stroke="rgba(179,156,255,.38)"/>
+                <text x="380" y="300" fill="rgba(234,240,255,.92)" font-size="17" font-weight="900">RAG 인덱스(벡터)</text>
+                <text x="380" y="324" fill="rgba(234,240,255,.70)" font-size="14" font-weight="700">권한 기반 검색 · 근거 반환</text>
+              </g>
 
-              <text x="495" y="156" class="rH">문맥 생성</text>
-              <text x="495" y="178" class="rS">Context 최소화</text>
+              <!-- right -->
+              <g filter="url(#shadow2)">
+                <rect x="668" y="150" width="200" height="90" rx="18" fill="rgba(108,240,210,.08)" stroke="rgba(108,240,210,.35)"/>
+                <text x="692" y="186" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">추론 엔진</text>
+                <text x="692" y="214" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">상용/사내 LLM</text>
 
-              <text x="695" y="156" class="rH">추론 실행</text>
-              <text x="695" y="178" class="rS">내부/외부 엔진</text>
+                <rect x="668" y="256" width="200" height="90" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="692" y="292" fill="rgba(234,240,255,.95)" font-size="18" font-weight="900">서비스 레이어</text>
+                <text x="692" y="320" fill="rgba(234,240,255,.70)" font-size="15" font-weight="700">챗봇 · 검색 · 요약</text>
+              </g>
 
-              <text x="852" y="164" class="rH">결과</text>
-              <text x="852" y="186" class="rS">반환</text>
+              <!-- connectors -->
+              <path d="M302 194 C330 194, 326 194, 334 194" stroke="rgba(110,168,255,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M302 298 C330 298, 326 298, 334 298" stroke="rgba(110,168,255,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M634 196 C654 196, 654 196, 668 196" stroke="rgba(108,240,210,.55)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M634 292 C654 292, 654 292, 668 292" stroke="rgba(179,156,255,.55)" stroke-width="4" stroke-linecap="round"/>
 
-              <!-- arrows -->
-              <path d="M240 180H270" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M440 180H470" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M640 180H670" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M240 180H270" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M440 180H470" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M640 180H670" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H840" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
-
-              <path d="M840 180H910" stroke="rgba(255,255,255,.25)" stroke-width="6" stroke-linecap="round"/>
+              <!-- bottom note -->
+              <text x="52" y="382" fill="rgba(234,240,255,.65)" font-size="14" font-weight="700">
+                핵심: 원문은 내부 보관 · 검색 결과(근거)만 컨텍스트로 전달 · 운영자가 권한/비용/로그를 통제
+              </text>
             </svg>
           </div>
-
-          <ul class="bullets">
-            <li>권한 검증 후, 검색 가능한 범위만 조회</li>
-            <li>문서/규정/지침에서 관련 문장만 발췌</li>
-            <li>정제된 문맥만 모델에 전달</li>
-            <li>응답/근거/로그를 함께 제공</li>
-          </ul>
-        </div>
-
-        <div class="card reveal">
-          <h3>“데이터를 안 보내고 추론만”을 어떻게 보장하나</h3>
-          <p>신뢰는 “가능”이 아니라 “불가능”을 명시할 때 생깁니다.</p>
-          <div class="chip-row">
-            <span class="chip green">DB 직접 접근 불가</span>
-            <span class="chip green">파일 시스템 접근 불가</span>
-            <span class="chip green">정책 우회 불가</span>
-          </div>
-          <ul class="bullets">
-            <li>모델은 내부 DB/스토리지에 직접 접근하지 못함</li>
-            <li>마스킹/금칙/권한은 게이트웨이가 강제 적용</li>
-            <li>요청 ID·엔진·문맥 길이·정책 적용 로그 기록</li>
-            <li>엔진 교체형 구조로 종속 최소화</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ARCH SVG: "증명처럼 보이는 로그" -->
-      <div class="proof-grid reveal">
-        <div class="card">
-          <h3>웹사이트에서 “증명처럼” 보여주기 (예시)</h3>
-          <p>원문이 아니라 “최소 문맥”이 전달되는 형태를 예시로 공개합니다.</p>
-          <div class="codebox" aria-label="Context example">
-요청 ID: 2026-02-20T10:15:31Z-8F2A
-사용자: user@company (role: staff)
-엔진: External LLM (allowed scope)
-정책: PII_MASKING=ON, CONFIDENTIAL_BLOCK=ON
-
-[질문]
-"이번 분기 구매 정책 변경사항 요약해줘"
-
-[전달된 문맥(Context)]
-- (발췌) 구매정책_v3.2 / 2026-02-01 / 승인번호 XXXX
-- (발췌) 변경 요약: 결재 단계 2→3, 금액 기준 상향, 예외 규정 추가
-- (발췌) 시행일: 2026-03-01
-- 총 420자 / 민감정보 마스킹 처리됨
-          </div>
-        </div>
-
-        <div class="kv">
-          <div class="row2"><strong>검증 포인트 1</strong><span>원문/DB 전체가 아닌 “발췌 문장”만 전달되는지</span></div>
-          <div class="row2"><strong>검증 포인트 2</strong><span>권한/정책/마스킹이 모델이 아니라 게이트웨이에서 강제되는지</span></div>
-          <div class="row2"><strong>검증 포인트 3</strong><span>요청/엔진/문맥 길이/정책이 로그로 남는지</span></div>
-          <div class="row2"><strong>검증 포인트 4</strong><span>엔진 교체가 가능한지(LLM 종속 최소화)</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DEPLOYMENT -->
-  <section id="deployment">
+  <!-- RAG -->
+  <section id="rag">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <div>
-          <h2>도입 모델</h2>
+          <h2>RAG 흐름</h2>
           <p class="sub">
-            On-Premise / Gov Cloud / Hybrid 중 어떤 방식이든 “데이터 통제” 기준으로 설계합니다.
-            동일한 구조에서 <strong>엔진만 교체</strong>됩니다.
+            RAG는 “AI가 그냥 답하는 것”이 아니라, <b>질문 → 검색 → 근거(문맥) → 추론 → 결과</b>로
+            답변의 근거를 만들고, 데이터 반출을 최소화하는 방식입니다.
           </p>
         </div>
       </div>
 
-      <div class="grid-3">
-        <div class="card reveal">
-          <h3>On-Premise</h3>
-          <p>내부망에서 데이터와 모델을 운영하는 최대 통제 환경</p>
+      <div class="two">
+        <div class="panel">
+          <h3>웹사이트에서 쉽게 설명하는 문장</h3>
+          <p class="p">
+            “AI가 기억(학습데이터)을 꺼내는 게 아니라, <b>우리 문서/DB에서 관련 근거를 찾아</b>
+            그 근거로만 답하게 만드는 구조입니다.”
+          </p>
           <ul class="bullets">
-            <li>망분리/폐쇄망 대응</li>
-            <li>내부 GPU/LLM 운영</li>
-            <li>감사/보안 요구 최고 수준</li>
+            <li><b>벡터 데이터</b>: 문서를 “의미 기반 검색”이 되도록 숫자 벡터로 변환한 인덱스</li>
+            <li><b>추론(GPU)</b>: LLM이 컨텍스트(근거)를 읽고 답변을 생성하는 계산 과정</li>
+            <li><b>통제</b>: 권한/마스킹/감사로그로 “누가 무엇을 봤는지” 추적</li>
           </ul>
         </div>
-        <div class="card reveal">
-          <h3>Gov/Private Cloud</h3>
-          <p>정책 준수 환경에서 확장성과 운영 효율을 확보</p>
-          <ul class="bullets">
-            <li>전용 구역/국내 리전</li>
-            <li>확장 용이</li>
-            <li>운영 부담 감소</li>
-          </ul>
+
+        <!-- ✅ 인라인 SVG: RAG 흐름 (글자 크게) -->
+        <div class="figure">
+          <div class="cap"><b>RAG 흐름</b><span>질문 → 검색 → 문맥 → 추론 → 결과</span></div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 920 320" width="100%" height="auto" role="img" aria-label="RAG 흐름 다이어그램">
+              <defs>
+                <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="rgba(0,0,0,.45)"/>
+                </filter>
+              </defs>
+
+              <rect x="18" y="18" width="884" height="284" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
+
+              <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">RAG 흐름</text>
+              <text x="670" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">질문 → 검색 → 문맥 → 추론 → 결과</text>
+
+              <!-- steps -->
+              <g filter="url(#shadow3)">
+                <rect x="70" y="120" width="160" height="120" rx="18" fill="rgba(110,168,255,.10)" stroke="rgba(110,168,255,.38)"/>
+                <text x="98" y="160" fill="rgba(234,240,255,.96)" font-size="18" font-weight="900">사용자 질문</text>
+                <text x="98" y="186" fill="rgba(234,240,255,.70)" font-size="14" font-weight="800">요청 수신</text>
+
+                <rect x="260" y="120" width="160" height="120" rx="18" fill="rgba(108,240,210,.08)" stroke="rgba(108,240,210,.38)"/>
+                <text x="288" y="160" fill="rgba(234,240,255,.96)" font-size="18" font-weight="900">지식 검색</text>
+                <text x="288" y="186" fill="rgba(234,240,255,.70)" font-size="14" font-weight="800">RAG Retrieval</text>
+
+                <rect x="450" y="120" width="160" height="120" rx="18" fill="rgba(179,156,255,.10)" stroke="rgba(179,156,255,.38)"/>
+                <text x="476" y="160" fill="rgba(234,240,255,.96)" font-size="18" font-weight="900">문맥 생성</text>
+                <text x="476" y="186" fill="rgba(234,240,255,.70)" font-size="14" font-weight="800">Context 최소화</text>
+
+                <rect x="640" y="120" width="160" height="120" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="666" y="160" fill="rgba(234,240,255,.96)" font-size="18" font-weight="900">추론 실행</text>
+                <text x="666" y="186" fill="rgba(234,240,255,.70)" font-size="14" font-weight="800">내부/외부 엔진</text>
+
+                <rect x="820" y="120" width="70" height="120" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="835" y="168" fill="rgba(234,240,255,.96)" font-size="16" font-weight="900">결과</text>
+                <text x="832" y="194" fill="rgba(234,240,255,.70)" font-size="13" font-weight="800">응답</text>
+              </g>
+
+              <!-- arrows -->
+              <path d="M230 180 L260 180" stroke="rgba(110,168,255,.60)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M420 180 L450 180" stroke="rgba(108,240,210,.60)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M610 180 L640 180" stroke="rgba(179,156,255,.60)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M800 180 L820 180" stroke="rgba(234,240,255,.40)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
-        <div class="card reveal">
-          <h3>Hybrid</h3>
-          <p>민감 데이터는 내부, 비민감은 외부 엔진 활용</p>
-          <ul class="bullets">
-            <li>데이터는 내부 고정</li>
-            <li>추론 엔진 선택(내부/외부)</li>
-            <li>단계별 도입(PoC→확장)</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- DEPLOYMENT SVG -->
-      <div class="illus reveal">
-        <div class="cap">
-          <span>On-Prem / Gov Cloud / Hybrid 비교</span>
-          <span class="muted2">도입 환경별 “통제·확장·운영” 균형</span>
-        </div>
-        <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도입 모델 비교 다이어그램">
-          <defs>
-            <filter id="dp_sh" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".22"/>
-            </filter>
-            <style>
-              .dH{font: 900 16px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.92);}
-              .dS{font: 700 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.70);}
-              .dK{font: 900 12px 'Noto Sans KR', sans-serif; fill: rgba(234,240,255,.58);}
-            </style>
-          </defs>
-
-          <rect width="980" height="360" fill="rgba(255,255,255,0.02)"/>
-          <g filter="url(#dp_sh)">
-            <rect x="70"  y="82" width="270" height="220" rx="22" fill="rgba(52,211,153,.10)" stroke="rgba(52,211,153,.22)"/>
-            <rect x="355" y="82" width="270" height="220" rx="22" fill="rgba(59,130,246,.10)" stroke="rgba(59,130,246,.22)"/>
-            <rect x="640" y="82" width="270" height="220" rx="22" fill="rgba(167,139,250,.10)" stroke="rgba(167,139,250,.22)"/>
-          </g>
-
-          <text x="96"  y="126" class="dH">On-Premise</text>
-          <text x="96"  y="152" class="dS">내부망 완전 통제</text>
-          <text x="96"  y="188" class="dK">권장: 망분리/고보안</text>
-
-          <text x="381" y="126" class="dH">Gov / Private Cloud</text>
-          <text x="381" y="152" class="dS">정책 준수 + 확장성</text>
-          <text x="381" y="188" class="dK">권장: 빠른 확장</text>
-
-          <text x="666" y="126" class="dH">Hybrid</text>
-          <text x="666" y="152" class="dS">데이터 내부 + 추론 선택</text>
-          <text x="666" y="188" class="dK">권장: 현실적 최적 조합</text>
-
-          <!-- mini bars -->
-          <text x="96" y="244" class="dS">통제</text>
-          <rect x="140" y="232" width="160" height="12" rx="6" fill="rgba(52,211,153,.55)"/>
-          <text x="96" y="270" class="dS">확장</text>
-          <rect x="140" y="258" width="90" height="12" rx="6" fill="rgba(255,255,255,.16)"/>
-
-          <text x="381" y="244" class="dS">통제</text>
-          <rect x="425" y="232" width="120" height="12" rx="6" fill="rgba(59,130,246,.50)"/>
-          <text x="381" y="270" class="dS">확장</text>
-          <rect x="425" y="258" width="160" height="12" rx="6" fill="rgba(59,130,246,.28)"/>
-
-          <text x="666" y="244" class="dS">통제</text>
-          <rect x="710" y="232" width="140" height="12" rx="6" fill="rgba(167,139,250,.45)"/>
-          <text x="666" y="270" class="dS">확장</text>
-          <rect x="710" y="258" width="140" height="12" rx="6" fill="rgba(34,211,238,.18)"/>
-        </svg>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
+  <!-- DEPLOY -->
+  <section id="deploy">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <div>
-          <h2>주요 수행실적</h2>
+          <h2>배포 옵션</h2>
           <p class="sub">
-            고객사 요청 및 보안 정책에 따라 기관명/세부 내용은 비공개 처리될 수 있습니다.
-            (구축/고도화/운영 통제 중심)
+            “클라우드 차단/데이터 유출 우려”가 있는 환경에서도 운영할 수 있도록
+            <b>On-Prem / Gov Cloud / Hybrid</b>를 선택할 수 있습니다.
           </p>
         </div>
       </div>
 
-      <div class="table reveal" role="table" aria-label="Projects">
-        <div class="tr th" role="row">
-          <div role="columnheader">구분</div>
-          <div role="columnheader">수행 내용</div>
-          <div role="columnheader">비고</div>
+      <div class="two">
+        <div class="panel">
+          <h3>On-Premise가 성능이 떨어지나?</h3>
+          <p class="p">
+            <b>모델/하드웨어/최적화</b>에 따라 달라집니다. 같은 급의 모델을 충분한 GPU로 돌리면
+            체감 성능은 유사할 수 있습니다. 다만 상용 초대형 모델과 비교하면,
+            <b>모델 규모/학습량</b> 때문에 일반적으로는 차이가 날 수 있습니다.
+          </p>
+          <ul class="bullets">
+            <li>On-Prem의 강점: <b>데이터 통제</b>, <b>네트워크 격리</b>, <b>정책 준수</b></li>
+            <li>Cloud의 강점: <b>최신/대형 모델</b>, <b>확장성</b>, <b>운영 편의</b></li>
+            <li>Hybrid의 강점: <b>민감 데이터는 내부</b>, 나머지는 <b>클라우드 추론</b></li>
+          </ul>
         </div>
 
-        <div class="tr" role="row">
-          <div class="tag" role="cell">대학</div>
-          <div role="cell">AI 기반 학습지원 플랫폼 구축</div>
-          <div role="cell" class="muted">구축/고도화</div>
+        <div class="panel">
+          <h3>선택 가이드</h3>
+          <ul class="bullets">
+            <li><b>On-Prem</b>: 내부망/보안 최우선, 외부 송신 제한이 명확한 조직</li>
+            <li><b>Gov/Private Cloud</b>: 정책 준수 + 관리형 인프라 필요</li>
+            <li><b>Hybrid</b>: 민감 데이터는 내부 RAG, 비민감 업무는 클라우드</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="tr" role="row">
-          <div class="tag" role="cell">대학</div>
-          <div role="cell">데이터 통합 분석 플랫폼 고도화</div>
-          <div role="cell" class="muted">권한/통계/대시보드</div>
-        </div>
-
-        <div class="tr" role="row">
-          <div class="tag" role="cell">공공·기관</div>
-          <div role="cell">GenAI 서비스 플랫폼 구축</div>
-          <div role="cell" class="muted">운영/비용/토큰</div>
-        </div>
-
-        <div class="tr" role="row">
-          <div class="tag" role="cell">기업</div>
-          <div role="cell">AI 서비스 연계 및 운영 플랫폼 구축</div>
-          <div role="cell" class="muted">연계/보안/운영</div>
+  <!-- SECURITY / PROOF -->
+  <section id="security">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>“데이터를 안 보내고 추론만”을 어떻게 보장하나?</h2>
+          <p class="sub">
+            웹사이트에서 ‘증명처럼’ 보여주려면, 기술을 약속 문장이 아니라 <b>구조+통제+로그</b>로 보여줘야 합니다.
+          </p>
         </div>
       </div>
 
-      <p class="note reveal"><strong>안내</strong> 고객사 요청 및 보안 정책에 따라 기관명/세부 내용은 비공개 처리</p>
+      <div class="two">
+        <div class="panel">
+          <h3>기술적으로 보장하는 방법(핵심 4가지)</h3>
+          <ul class="bullets">
+            <li><b>데이터 경로 분리</b>: 원문 저장소는 내부, 외부로는 “검색 결과 요약/발췌”만</li>
+            <li><b>권한 기반 검색</b>: 사용자 Role/부서에 따라 검색 가능한 근거 자체가 달라짐</li>
+            <li><b>마스킹/비식별화</b>: 개인정보/민감정보는 컨텍스트 생성 단계에서 자동 제거</li>
+            <li><b>감사로그</b>: 누가 어떤 문서를 근거로 봤는지, 언제 어떤 응답이 나갔는지 기록</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>웹사이트에서 “증명처럼” 보여주는 구성</h3>
+          <ul class="bullets">
+            <li>1) <b>아키텍처 그림</b>: “원문은 내부 / 근거만 전달” 화살표로 명확히</li>
+            <li>2) <b>정책 화면</b>: 권한/마스킹/차단 정책 예시 UI</li>
+            <li>3) <b>감사 로그 화면</b>: 검색/근거/응답 이력 샘플</li>
+            <li>4) <b>보안 FAQ</b>: “어떤 데이터가 외부로 나가나?”를 표로 정리</li>
+          </ul>
+          <p class="p" style="margin-top:10px;">
+            (원하시면 “보안 FAQ 표”와 “정책/로그 UI 목업”도 같은 톤으로 SVG로 추가해드릴게요.)
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <div class="cta-block reveal">
+      <div class="section-head">
         <div>
-          <h3>프로젝트 목적과 환경을 이해한 후, 가장 적합한 방향을 제안드립니다.</h3>
-          <p>온프레미스/클라우드/하이브리드 어떤 방식이든 “데이터 통제” 기준으로 설계합니다.</p>
-        </div>
-        <div class="cta-actions">
-          <a class="btn btn-primary" href="mailto:admin@kostlab.co.kr">메일 문의</a>
-          <a class="btn" href="#top">상단으로</a>
+          <h2>문의</h2>
+          <p class="sub">
+            현재 환경(온프렘/클라우드/혼합), 연동 대상(포털/SSO/LMS/업무), 데이터 유형(문서/DB)을 알려주시면
+            가장 현실적인 구성으로 제안드립니다.
+          </p>
         </div>
       </div>
 
-      <div class="grid-2" style="margin-top:16px;">
-        <div class="card reveal">
+      <div class="two">
+        <div class="panel">
           <h3>연락처</h3>
-          <p>
-            이메일: <a href="mailto:admin@kostlab.co.kr" style="color:var(--brand2); font-weight:950; text-decoration:none;">admin@kostlab.co.kr</a><br/>
+          <p class="p">
+            이메일: <a href="mailto:admin@kostlab.co.kr" style="font-weight:900; color:var(--brand); text-decoration:none;">admin@kostlab.co.kr</a><br>
             웹사이트: kostlab.co.kr
           </p>
+          <ul class="bullets">
+            <li>요청 목적(지식검색/업무보조/챗봇/요약/분석)</li>
+            <li>배포 형태(On-Prem / Cloud / Hybrid)</li>
+            <li>보안 요구(망분리/반출 제한/로그/마스킹)</li>
+          </ul>
         </div>
 
-        <div class="card reveal">
-          <h3>협업 요청 시 포함하면 좋은 내용</h3>
+        <div class="panel">
+          <h3>빠른 미팅을 위한 체크리스트</h3>
           <ul class="bullets">
-            <li>프로젝트 목적(학습지원/행정지원/지식검색/업무보조 등)</li>
-            <li>일정(착수 희망 시점 / 마감)</li>
-            <li>현재 환경(온프레미스/클라우드/혼합)</li>
-            <li>연계 대상 시스템(LMS/학사/SSO/그룹웨어 등)</li>
+            <li>연동 시스템: SSO, 포털, LMS, 그룹웨어, 문서관리</li>
+            <li>데이터: 규정/지침/업무 매뉴얼/DB/게시판</li>
+            <li>사용자: 임직원/부서/권한 체계</li>
+            <li>운영: 예상 사용자 수, 일일 질의량, 비용 한도</li>
           </ul>
         </div>
       </div>
-
-      <footer>
-        <div class="container f-inner">
-          <div>© KostLab. All Rights Reserved.</div>
-          <div class="f-links">
-            <a href="#about">About</a> ·
-            <a href="#services">Services</a> ·
-            <a href="#product">Product</a> ·
-            <a href="#architecture">Architecture</a> ·
-            <a href="#deployment">Deployment</a> ·
-            <a href="#projects">Projects</a> ·
-            <a href="#contact">Contact</a>
-          </div>
-        </div>
-      </footer>
     </div>
   </section>
+
+  <footer>
+    <div class="container f-inner">
+      <div>© KostLab. All Rights Reserved.</div>
+      <div>
+        <a href="#top">Top</a> ·
+        <a href="#problem">Problem</a> ·
+        <a href="#overview">Overview</a> ·
+        <a href="#rag">RAG</a> ·
+        <a href="#deploy">Deploy</a> ·
+        <a href="#security">Security</a> ·
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
 </main>
-
-<script>
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting) e.target.classList.add('on');
-    });
-  }, {threshold: 0.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // Mobile menu
-  const drawer = document.getElementById('drawer');
-  const openMenu = document.getElementById('openMenu');
-  const closeMenu = document.getElementById('closeMenu');
-
-  function openDrawer(){
-    drawer.classList.add('on');
-    drawer.setAttribute('aria-hidden','false');
-  }
-  function closeDrawer(){
-    drawer.classList.remove('on');
-    drawer.setAttribute('aria-hidden','true');
-  }
-
-  openMenu?.addEventListener('click', openDrawer);
-  closeMenu?.addEventListener('click', closeDrawer);
-  drawer?.addEventListener('click', (e)=>{ if(e.target === drawer) closeDrawer(); });
-
-  document.querySelectorAll('.dlink').forEach(a=>{
-    a.addEventListener('click', closeDrawer);
-  });
-</script>
 </body>
 </html>
