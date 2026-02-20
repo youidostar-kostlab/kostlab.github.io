@@ -34,6 +34,14 @@
       --radius:18px;
       --radius2:24px;
       --max:1180px;
+
+      /* ✅ Typography scale (브로셔 톤 균형) */
+      --fs-h1: clamp(30px, 3.2vw, 40px);
+      --fs-h2: clamp(22px, 2.1vw, 28px);
+      --fs-h3: clamp(15px, 1.35vw, 16px);
+      --fs-body: clamp(15px, 1.2vw, 17px);
+      --fs-lead: clamp(15px, 1.25vw, 17px);
+      --fs-nav: 13px;
     }
 
     *{box-sizing:border-box}
@@ -91,7 +99,7 @@
       text-decoration:none;
       color:var(--muted);
       font-weight:900;
-      font-size:13px;
+      font-size:var(--fs-nav);
       padding:10px 12px;
       border-radius:12px;
       border:1px solid transparent;
@@ -145,7 +153,7 @@
     }
     h1{
       margin:14px 0 12px;
-      font-size:44px;
+      font-size:var(--fs-h1);
       letter-spacing:-.02em;
       line-height:1.08;
     }
@@ -154,7 +162,7 @@
       color:var(--muted);
       line-height:1.85;
       font-weight:600;
-      font-size:16px;
+      font-size:var(--fs-lead);
       max-width:760px;
     }
     .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
@@ -187,15 +195,15 @@
       box-shadow:var(--shadow);
       padding:18px;
     }
-    .card h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
+    .card h3{margin:0 0 10px; font-size:var(--fs-h3); letter-spacing:-.01em}
     .list{margin:0; padding:0; list-style:none; display:grid; gap:10px;}
-    .list li{color:var(--muted); font-weight:700; line-height:1.6;}
+    .list li{color:var(--muted); font-weight:700; line-height:1.6; font-size:var(--fs-body);}
     .list li b{color:var(--text)}
 
     section{padding:54px 0; border-top:1px solid var(--line);}
     .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:14px; flex-wrap:wrap;}
-    h2{margin:0; font-size:28px; letter-spacing:-.01em}
-    .sub{margin:10px 0 0; color:var(--muted); line-height:1.9; font-weight:600; max-width:900px}
+    h2{margin:0; font-size:var(--fs-h2); letter-spacing:-.01em}
+    .sub{margin:10px 0 0; color:var(--muted); line-height:1.9; font-weight:600; max-width:900px; font-size:var(--fs-body);}
 
     .panel{
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -205,9 +213,9 @@
       padding:18px;
       overflow:hidden;
     }
-    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
-    .p{margin:0; color:var(--muted); line-height:1.9; font-weight:600}
-    .bullets{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.9; font-weight:650}
+    .panel h3{margin:0 0 10px; font-size:var(--fs-h3); letter-spacing:-.01em}
+    .p{margin:0; color:var(--muted); line-height:1.9; font-weight:600; font-size:var(--fs-body);}
+    .bullets{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.9; font-weight:650; font-size:var(--fs-body);}
     .bullets li{margin:4px 0}
 
     /* KPI */
@@ -249,6 +257,19 @@
     .figure .cap b{color:var(--text)}
     .figure .svg-wrap{padding:14px;}
 
+    /* ✅ SVG 가독성: 전체 일괄 폰트 업스케일 */
+    .figure svg text { font-size: 14px !important; }
+    .figure svg text[font-size="22"] { font-size: 20px !important; }
+    .figure svg text[font-size="20"] { font-size: 19px !important; }
+    .figure svg text[font-size="18"] { font-size: 17px !important; }
+    .figure svg text[font-size="17"] { font-size: 16px !important; }
+    .figure svg text[font-size="16"] { font-size: 15px !important; }
+    .figure svg text[font-size="15"] { font-size: 14px !important; }
+    .figure svg text[font-size="14"] { font-size: 13.5px !important; }
+    .figure svg text[font-size="13"] { font-size: 13px !important; }
+    .figure svg text[font-size="12"] { font-size: 12.5px !important; }
+    .figure svg text[font-weight="900"] { letter-spacing: -0.01em; }
+
     /* Feature grid */
     .cards3{
       display:grid;
@@ -264,7 +285,7 @@
       box-shadow:0 18px 55px rgba(0,0,0,.22);
     }
     .feat b{display:block; font-size:14px; letter-spacing:-.01em}
-    .feat p{margin:8px 0 0; color:var(--muted); line-height:1.75; font-weight:650}
+    .feat p{margin:8px 0 0; color:var(--muted); line-height:1.75; font-weight:650; font-size:var(--fs-body);}
 
     /* CTA band */
     .ctaBand{
@@ -301,7 +322,7 @@
       .two{grid-template-columns:1fr;}
       .kpi{grid-template-columns:1fr;}
       .cards3{grid-template-columns:1fr;}
-      h1{font-size:36px;}
+      h1{font-size:clamp(28px, 6.5vw, 36px);}
     }
   </style>
 </head>
@@ -376,7 +397,7 @@
       </div>
 
       <aside class="card">
-        <h3>브로셔에서 “증명처럼” 보여줄 핵심 3가지</h3>
+        <h3>신뢰 포인트 3가지 (Data Path · Control · Audit)</h3>
         <ul class="list">
           <li>✅ <b>데이터 경로</b>: 원문은 내부, 외부로는 “근거(발췌/요약)”만 전달</li>
           <li>✅ <b>통제</b>: 권한/마스킹/차단 정책을 제품 기능으로 제공</li>
@@ -432,8 +453,9 @@
               <text x="352" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">데이터는 쌓이지만</text>
               <text x="352" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">분석·활용이 제한, 보고용으로만 사용</text>
 
-              <text x="648" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">AI를 붙여도</text>
-              <text x="648" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">운영/보안/권한이 없어 확산 어려움</text>
+              <!-- ✅ 오른쪽 텍스트 x 안전여백 확보 -->
+              <text x="620" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">AI를 붙여도</text>
+              <text x="620" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">운영/보안/권한이 없어 확산 어려움</text>
 
               <g filter="url(#shadow_p)">
                 <rect x="52" y="145" width="252" height="170" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
@@ -518,8 +540,9 @@
               <text x="348" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">데이터 · RAG 레이어</text>
               <text x="348" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">수집 · 정제 · 인덱싱 · 권한검색</text>
 
-              <text x="684" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">서비스/운영</text>
-              <text x="684" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">챗봇 · 검색 · 요약 · 정책/비용</text>
+              <!-- ✅ 오른쪽 텍스트 x 안전여백 확보 -->
+              <text x="650" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">서비스/운영</text>
+              <text x="650" y="104" fill="rgba(234,240,255,.70)" font-size="16" font-weight="700">챗봇 · 검색 · 요약 · 정책/비용</text>
 
               <g filter="url(#shadow_o)">
                 <rect x="52" y="150" width="250" height="88" rx="18" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
@@ -606,7 +629,8 @@
               <rect x="18" y="18" width="884" height="384" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
 
               <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">핵심 모듈</text>
-              <text x="680" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">데이터 → RAG → 서비스 → 운영</text>
+              <!-- ✅ 오른쪽 상단 설명 x 안전여백 확보 -->
+              <text x="610" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">데이터 → RAG → 서비스 → 운영</text>
 
               <g filter="url(#shadow_m)">
                 <rect x="52" y="120" width="260" height="120" rx="18" fill="rgba(110,168,255,.10)" stroke="rgba(110,168,255,.35)"/>
@@ -684,7 +708,8 @@
               <rect x="18" y="18" width="884" height="284" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
 
               <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">RAG 흐름</text>
-              <text x="670" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">질문 → 검색 → 문맥 → 추론 → 결과</text>
+              <!-- ✅ 오른쪽 상단 설명 x 안전여백 확보 -->
+              <text x="600" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">질문 → 검색 → 문맥 → 추론 → 결과</text>
 
               <g filter="url(#shadow_r)">
                 <rect x="70" y="120" width="160" height="120" rx="18" fill="rgba(110,168,255,.10)" stroke="rgba(110,168,255,.38)"/>
@@ -788,26 +813,27 @@
                 <text x="510" y="159" fill="rgba(234,240,255,.80)" font-size="14" font-weight="800">시간</text>
                 <text x="610" y="159" fill="rgba(234,240,255,.80)" font-size="14" font-weight="800">사용자</text>
                 <text x="710" y="159" fill="rgba(234,240,255,.80)" font-size="14" font-weight="800">근거</text>
-                <text x="804" y="159" fill="rgba(234,240,255,.80)" font-size="14" font-weight="800">상태</text>
+                <!-- ✅ 상태 컬럼 x 안전여백 확보 -->
+                <text x="792" y="159" fill="rgba(234,240,255,.80)" font-size="14" font-weight="800">상태</text>
 
                 <!-- rows -->
                 <rect x="498" y="182" width="350" height="44" rx="12" fill="rgba(110,168,255,.06)" stroke="rgba(110,168,255,.18)"/>
                 <text x="510" y="210" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">10:12:03</text>
                 <text x="610" y="210" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">kim**</text>
                 <text x="710" y="210" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">DOC-218</text>
-                <text x="804" y="210" fill="rgba(108,240,210,.95)" font-size="14" font-weight="900">OK</text>
+                <text x="792" y="210" fill="rgba(108,240,210,.95)" font-size="14" font-weight="900">OK</text>
 
                 <rect x="498" y="236" width="350" height="44" rx="12" fill="rgba(179,156,255,.06)" stroke="rgba(179,156,255,.18)"/>
                 <text x="510" y="264" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">10:14:22</text>
                 <text x="610" y="264" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">park**</text>
                 <text x="710" y="264" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">DOC-041</text>
-                <text x="792" y="264" fill="rgba(255,207,90,.95)" font-size="14" font-weight="900">MASK</text>
+                <text x="780" y="264" fill="rgba(255,207,90,.95)" font-size="14" font-weight="900">MASK</text>
 
                 <rect x="498" y="290" width="350" height="44" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
                 <text x="510" y="318" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">10:20:08</text>
                 <text x="610" y="318" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">lee**</text>
                 <text x="710" y="318" fill="rgba(234,240,255,.86)" font-size="14" font-weight="800">N/A</text>
-                <text x="794" y="318" fill="rgba(255,120,120,.95)" font-size="14" font-weight="900">BLOCK</text>
+                <text x="780" y="318" fill="rgba(255,120,120,.95)" font-size="14" font-weight="900">BLOCK</text>
 
                 <text x="510" y="372" fill="rgba(234,240,255,.70)" font-size="13" font-weight="800">
                   로그에는 “요청자/시간/근거 문서/마스킹 여부/차단 사유”가 기록됩니다.
@@ -1036,7 +1062,8 @@
               <rect x="18" y="18" width="884" height="384" rx="22" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/>
 
               <text x="52" y="74" fill="rgba(234,240,255,.92)" font-size="22" font-weight="900">조직 업무에 붙는 위치</text>
-              <text x="650" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">현업 화면 안에서 바로 사용</text>
+              <!-- ✅ 오른쪽 상단 설명 x 안전여백 확보 -->
+              <text x="600" y="74" fill="rgba(234,240,255,.72)" font-size="16" font-weight="800">현업 화면 안에서 바로 사용</text>
 
               <g filter="url(#shadow_u)">
                 <rect x="52" y="120" width="260" height="100" rx="18" fill="rgba(110,168,255,.10)" stroke="rgba(110,168,255,.35)"/>
